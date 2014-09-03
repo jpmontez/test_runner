@@ -78,12 +78,12 @@ class Environment(object):
     def get_networking(self):
         LOG.info('Fetching networks')
 
+        networks = self.neutron.list_networks()['networks']
+        routers = self.neutron.list_routers()['routers']
+
         def _find_resource(resources, name):
             return next(resource for resource in resources
                         if name in resource['name'])
-
-        networks = self.neutron.list_networks()['networks']
-        routers = self.neutron.list_routers()['routers']
 
         self.network = _find_resource(networks, 'private')
         self.router = _find_resource(routers, 'public-private')
