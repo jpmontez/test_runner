@@ -7,15 +7,15 @@ from setuptools import setup
 
 
 setup(
-    name='test-runner',
+    name='test_runner',
     version='1.0',
     description='Execute OpenStack frameworks',
     # long_description=readme(),
-    url='https://github.com/jpmontez/test-runner',
+    url='https://github.com/jpmontez/test_runner',
     author='Julian Montez',
     author_email='julian.montez@rackspace.com',
     license='MIT',
-    packages=['test-runner'],
+    packages=['test_runner'],
     entry_points={
         'console_scripts': [
             'test-runner = test_runner.executable:main',

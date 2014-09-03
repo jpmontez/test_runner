@@ -14,7 +14,7 @@ class Reporter(object):
         self.name = name
 
     def setup(self):
-        logger = logging.getLogger('test-runner')
+        logger = logging.getLogger('test_runner')
 
         ch = logging.StreamHandler(sys.stdout)
         ch.setLevel(logging.DEBUG)
