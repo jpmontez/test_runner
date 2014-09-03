@@ -17,6 +17,4 @@ def main(endpoint, username='admin', password='secrete', test_path='api'):
         results = framework.run_tests()
         LOG.info('Results: {0}'.format(results))
 
-
-if __name__ == '__main__':
-    argh.dispatch_command(main)
+argh.dispatch_command(main)
