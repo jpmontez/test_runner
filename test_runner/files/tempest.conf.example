@@ -30,7 +30,7 @@ uri = {{ endpoints['identity'][0]['publicURL'] }}
 api_v3 = false
 # BUG: Even though it's false, you need to provide a bunk URL
 # https://bugs.launchpad.net/tempest/+bug/1295132
-uri_v3 = {{ endpoints['identity'][0]['publicURL'] }}
+# uri_v3 = {{ endpoints['identity'][0]['publicURL'] }}
 # The identity region. Also used as the other services' region name unless
 # they are set explicitly.
 region = RegionOne
