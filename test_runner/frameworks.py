@@ -29,13 +29,9 @@ class Tempest(Framework):
 
     def __init__(self, environment, repo_dir, test_path):
         super(Tempest, self).__init__(environment)
-        self.repo_dir = repo_dir
-        self.test_path = test_path
-        self.populate_config()
 
     def populate_config(self):
         LOG.info('Building configuration file')
-
         template_dir = join(abspath(dirname(__file__)), 'files/')
 
         with open(join(template_dir, 'tempest.conf.example'), 'r') as fp:
@@ -49,22 +45,5 @@ class Tempest(Framework):
             network=self.network,
             router=self.router)
 
-        with open('/etc/tempest/tempest.conf', 'w') as fp:
+        with open('tempest.conf', 'w') as fp:
             fp.write(self.config)
-
-    def run_tests(self):
-        LOG.info('Running Tempest tests')
-
-        tests_dir = join(self.repo_dir, 'tempest/', self.test_path)
-        exclude_dir = join(self.repo_dir, 'tempest/api/identity/admin/v3')
-        results_file = '/tmp/results.json'
-
-        command = ('python -u `which nosetests` --where={0}'
-                   ' --exclude-dir={1}'
-                   ' --with-json --json-file={2}')
-
-        run_cmd(command.format(tests_dir, exclude_dir, results_file))
-
-        with open(results_file, 'r') as fp:
-            return json.dumps(json.load(fp), sort_keys=True, indent=2,
-                              separators=(',', ': '))

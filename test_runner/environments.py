@@ -24,13 +24,15 @@ class Environment(object):
             username=username,
             password=password,
             tenant_name=username,
-            auth_url=endpoint)
+            auth_url=endpoint,
+            endpoint_type='internalURL')
 
         self.nova = nova_client.Client(
             username=username,
             api_key=password,
             project_id=username,
-            auth_url=endpoint)
+            auth_url=endpoint,
+            endpoint_type='internalURL')
 
         self.endpoints = {}
         self.images = []
@@ -77,7 +79,6 @@ class Environment(object):
 
     def get_networking(self):
         LOG.info('Fetching networks')
-
         networks = self.neutron.list_networks()['networks']
         routers = self.neutron.list_routers()['routers']
 
