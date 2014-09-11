@@ -8,13 +8,12 @@ from .utils import cleanup, Reporter
 LOG = Reporter(__name__).setup()
 
 
-def main(username='admin', password='secrete',
-         endpoint='http://localhost:5000/v2.0'):
-
+def main(username, password, endpoint):
     environment = Environment(username, password, endpoint)
 
     with cleanup(environment):
         environment.build()
-        Tempest(environment).populate_config()
+
+    Tempest(environment).populate_config()
 
 argh.dispatch_command(main)
