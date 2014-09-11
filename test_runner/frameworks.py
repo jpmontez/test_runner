@@ -27,7 +27,7 @@ class Framework(object):
 
 class Tempest(Framework):
 
-    def __init__(self, environment, repo_dir, test_path):
+    def __init__(self, environment):
         super(Tempest, self).__init__(environment)
 
     def populate_config(self):
