@@ -8,7 +8,9 @@ from .utils import cleanup, Reporter
 LOG = Reporter(__name__).setup()
 
 
-def main(username, password, endpoint):
+def main(username='admin', password='secrete',
+         endpoint='http://localhost:5000/v2.0'):
+
     environment = Environment(username, password, endpoint)
 
     with cleanup(environment):
