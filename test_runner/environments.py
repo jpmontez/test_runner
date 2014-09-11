@@ -51,8 +51,6 @@ class Environment(object):
         LOG.info('Destroying environment')
         if self.guests: map(self.keystone.users.delete, self.guests)
         if self.tenant: self.keystone.tenants.delete(self.tenant)
-        if self.network: self.neutron.delete_network(self.network['id'])
-        if self.router: self.neutron.delete_router(self.router['id'])
 
     def create_guests(self, password='secrete'):
         LOG.info('Creating guest users')
