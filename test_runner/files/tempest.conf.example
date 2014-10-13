@@ -390,9 +390,9 @@ floating_ip_range=10.17.255.192/26
 
 
 [compute-admin]
-username = {{ admin.username }}
-tenant_name = {{ admin.username }}
-password = {{ admin.password }}
+username={{ admin.username }}
+tenant_name={{ admin.username }}
+password={{ admin.password }}
 
 #
 # Options defined in tempest.config
@@ -591,16 +591,16 @@ snapshot=true
 
 [identity]
 disable_ssl_certificate_validation=true
-uri={{ endpoints['identity'][0]['publicURL'] }}
+uri={{ endpoints['identity'][0]['internalURL'] }}
 endpoint_type=internalURL
 
-username = {{ guests[0].username }}
-tenant_name = {{ guests[0].tenant_name }}
-password = {{ guests[0].password }}
+username={{ guests[0].username }}
+tenant_name={{ guests[0].tenant_name }}
+password={{ guests[0].password }}
 
-admin_username = {{ admin.username }}
-admin_tenant_name = {{ admin.username }}
-admin_password = {{ admin.password }}
+admin_username={{ admin.username }}
+admin_tenant_name={{ admin.username }}
+admin_password={{ admin.password }}
 
 #
 # Options defined in tempest.config
@@ -777,8 +777,8 @@ endpoint_type=internalURL
 #tenant_network_cidr=10.100.0.0/16
 #tenant_network_mask_bits=28
 tenant_networks_reachable=true
-public_network_id = {{ network.id }}
-public_router_id = {{ router.id }}
+public_network_id={{ network.id }}
+public_router_id={{ router.id }}
 dns_servers=8.8.8.8,8.8.4.4
 
 #
