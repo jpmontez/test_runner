@@ -45,5 +45,5 @@ class Tempest(Framework):
             network=self.network,
             router=self.router)
 
-        with open('/etc/tempest/tempest.conf', 'w') as fp:
+        with open('/opt/tempest/tempest.conf', 'w') as fp:
             fp.write(self.config)
