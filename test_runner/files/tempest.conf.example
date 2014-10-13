@@ -233,7 +233,7 @@ log_dir=/var/log/tempest/
 [compute]
 allow_tenant_isolation=true
 image_ref={{ images[0].id }}
-image_ref_alt = {{ images[1].id }}
+image_ref_alt={{ images[1].id }}
 flavor_ref=1
 flavor_ref_alt=2
 image_ssh_user=cirros
