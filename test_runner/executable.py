@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import argparse
+import logging
 
 from .environments import Environment
 from .frameworks import Tempest
