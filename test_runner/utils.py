@@ -8,27 +8,6 @@ from subprocess import check_call, CalledProcessError
 LOG = logging.getLogger(__name__)
 
 
-class Reporter(object):
-
-    def __init__(self, name):
-        self.name = name
-
-    def setup(self):
-        logger = logging.getLogger('test_runner')
-
-        ch = logging.StreamHandler(sys.stdout)
-        ch.setLevel(logging.DEBUG)
-
-        fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-        formatter = logging.Formatter(fmt)
-        ch.setFormatter(formatter)
-
-        logger.setLevel(logging.DEBUG)
-        logger.addHandler(ch)
-
-        return logger
-
-
 def run_cmd(command):
     """ Runs a command and returns an array of its results
 
@@ -43,6 +22,7 @@ def run_cmd(command):
                 'return': None,
                 'exception': exc,
                 'command': command}
+
 
 @contextmanager
 def cleanup(stage):

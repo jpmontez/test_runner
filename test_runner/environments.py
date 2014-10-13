@@ -51,10 +51,12 @@ class Environment(object):
         LOG.info('Destroying environment')
         if self.guests: map(self.keystone.users.delete, self.guests)
         if self.tenant: self.keystone.tenants.delete(self.tenant)
+        if self.role: self.keystone.roles.delete(self.role)
 
     def create_guests(self, password='secrete'):
         LOG.info('Creating guest users')
         self.tenant = self.keystone.tenants.create(rand_name('guest'))
+        self.role = self.keystone.roles.create('Member')
         self.guests = []
         for _ in range(2):
             user = self.keystone.users.create(name=rand_name('guest'),
