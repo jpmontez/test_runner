@@ -592,6 +592,7 @@ snapshot=true
 [identity]
 disable_ssl_certificate_validation=true
 uri={{ endpoints['identity'][0]['internalURL'] }}
+uri_v3={{ endpoints['identity'][0]['internalURL'] }}
 endpoint_type=internalURL
 
 username={{ guests[0].username }}
