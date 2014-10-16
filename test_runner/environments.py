@@ -99,7 +99,7 @@ class Environment(object):
 
     @staticmethod
     def _find_resource(resources, name):
-        if type(resources) is dict:
+        if type(resources) is dict or list:
             return next(resource for resource in resources
                         if name in resource['name'])
         else:
