@@ -415,7 +415,7 @@ password={{ admin.password }}
 
 
 [compute-feature-enabled]
-api_v3=true
+api_v3=false
 change_password=true
 resize=true
 pause=true
@@ -593,6 +593,7 @@ snapshot=true
 disable_ssl_certificate_validation=true
 uri={{ endpoints['identity'][0]['internalURL'] }}
 uri_v3={{ endpoints['identity'][0]['internalURL'] }}
+auth_version=v2
 endpoint_type=internalURL
 
 username={{ guests[0].username }}
@@ -705,6 +706,8 @@ api_v3=false
 
 
 [image]
+endpoint_type=internalURL
+http_image=http://download.cirros-cloud.net/0.3.1/cirros-0.3.1-x86_64-uec.tar.gz
 
 #
 # Options defined in tempest.config
@@ -728,6 +731,8 @@ api_v3=false
 
 
 [image-feature-enabled]
+api_v2=false
+api_v1=true
 
 #
 # Options defined in tempest.config
@@ -1031,6 +1036,12 @@ dns_servers=8.8.8.8,8.8.4.4
 
 
 [service_available]
+cinder=true
+neutron=true
+glance=true
+swift=false
+nova=true
+heat=true
 
 #
 # Options defined in tempest.config

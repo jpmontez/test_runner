@@ -61,11 +61,17 @@ class Environment(object):
         if self.guests: map(self.keystone.users.delete, self.guests)
         if self.tenant: self.keystone.tenants.delete(self.tenant)
         if self.role: self.keystone.roles.delete(self.role)
+        if.self.images: map(self.glance.images.delete, self.images)
 
     def create_guests(self, password='secrete'):
         LOG.info('Creating guest users')
         self.tenant = self.keystone.tenants.create(rand_name('guest'))
-        self.role = self.keystone.roles.create('Member')
+
+        try:
+            self.role = self.keystone.roles.create('Member')
+        except Exception as exc:
+            LOG.info('Member role already exists')
+
         self.guests = []
         for _ in range(2):
             user = self.keystone.users.create(name=rand_name('guest'),
@@ -78,7 +84,9 @@ class Environment(object):
     def get_images(self):
         LOG.info('Fetching image metadata')
         try:
-            self.images = [self.nova.images.list().pop() for _ in range(2)]
+            filters = {'name': 'cirros'}
+            image = next(self.glance.images.list(filters=filters))
+            self.images = [image, image]
         except StopIteration:
             image = self.glance.images.create(
                 name='cirros',
