@@ -61,6 +61,7 @@ class Environment(object):
         if self.guests: map(self.keystone.users.delete, self.guests)
         if self.tenant: self.keystone.tenants.delete(self.tenant)
         if self.role: self.keystone.roles.delete(self.role)
+        if self.images: self.glance.images.delete(self.images[0])
 
     def create_guests(self, password='secrete'):
         LOG.info('Creating guest users')
@@ -78,7 +79,9 @@ class Environment(object):
     def get_images(self):
         LOG.info('Fetching image metadata')
         try:
-            self.images = [self.nova.images.list().pop() for _ in range(2)]
+            filters = {'name': 'cirros'}
+            image = next(self.glance.images.list(filters=filters))
+            self.images = [image, image]
         except StopIteration:
             image = self.glance.images.create(
                 name='cirros',
