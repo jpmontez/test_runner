@@ -49,6 +49,8 @@ class Tempest(Framework):
             fp.write(self.config)
 
     def run(self):
+        LOG.info('Executing tests')
+
         cmd = ['testr init',
                'testr run tempest.api.identity',
                'testr run --parallel tempest.api.compute',
