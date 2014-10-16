@@ -8,14 +8,17 @@ from subprocess import check_call, CalledProcessError
 LOG = logging.getLogger(__name__)
 
 
-def run_cmd(command):
+def run_cmd(command, **kwargs):
     """ Runs a command and returns an array of its results
 
     :param command: String of a command to run within a shell
     :returns: Dictionary with keys relating to the execution's success
     """
+    if kwargs['cwd']:
+        cwd = kwargs['cwd']
+
     try:
-        ret = check_call(command, shell=True)
+        ret = check_call(command, shell=True, cwd=cwd)
         return {'success': True, 'return': ret, 'exception': None}
     except CalledProcessError as exc:
         return {'success': False,

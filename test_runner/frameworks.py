@@ -54,4 +54,5 @@ class Tempest(Framework):
                'testr run --parallel tempest.api.compute',
                'testr run --parallel tempest.api.image',
                'testr run --parallel tempest.api.network']
-        run_cmd('; '.join(cmd))
+
+        run_cmd('; '.join(cmd), cwd='/opt/tempest')
