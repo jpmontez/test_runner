@@ -61,7 +61,7 @@ class Environment(object):
         if self.guests: map(self.keystone.users.delete, self.guests)
         if self.tenant: self.keystone.tenants.delete(self.tenant)
         if self.role: self.keystone.roles.delete(self.role)
-        if.self.images: map(self.glance.images.delete, self.images)
+        if self.images: map(self.glance.images.delete, self.images)
 
     def create_guests(self, password='secrete'):
         LOG.info('Creating guest users')
