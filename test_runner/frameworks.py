@@ -47,3 +47,11 @@ class Tempest(Framework):
 
         with open('/etc/tempest/tempest.conf', 'w') as fp:
             fp.write(self.config)
+
+    def run(self):
+        cmd = ['testr init',
+               'testr run tempest.api.identity',
+               'testr run --parallel tempest.api.compute',
+               'testr run --parallel tempest.api.image',
+               'testr run --parallel tempest.api.network']
+        run_cmd('; '.join(cmd))
