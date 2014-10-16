@@ -33,8 +33,8 @@ def main():
     environment = Environment(args.username, args.password, args.endpoint)
 
     with cleanup(environment):
-        environment.build()
-        Tempest(environment).run()
+        stage = environment.build()
+        Tempest(stage).run()
 
 
 if __name__ == '__main__':
