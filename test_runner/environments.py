@@ -99,12 +99,13 @@ class Environment(object):
 
     @staticmethod
     def _find_resource(resources, name):
-        if type(resources) is dict or list:
-            return next(resource for resource in resources
-                        if name in resource['name'])
-        else:
-            return next(resource for resource in resources
-                        if name in resource.name)
+        for resource in resources:
+            if isinstance(resource, dict):
+                if name in resource['name']:
+                    return resource
+            else:
+                if name in resource.name:
+                    return resource
 
     def get_network(self):
         LOG.info('Fetching networks')
