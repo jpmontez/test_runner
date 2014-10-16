@@ -29,6 +29,7 @@ class Tempest(Framework):
 
     def __init__(self, environment):
         super(Tempest, self).__init__(environment)
+        self.populate_config()
 
     def populate_config(self):
         LOG.info('Building configuration file')
@@ -47,3 +48,14 @@ class Tempest(Framework):
 
         with open('/etc/tempest/tempest.conf', 'w') as fp:
             fp.write(self.config)
+
+    def run(self):
+        LOG.info('Executing tests')
+
+        cmd = ['testr init',
+               'testr run tempest.api.identity',
+               'testr run --parallel tempest.api.compute',
+               'testr run --parallel tempest.api.image',
+               'testr run --parallel tempest.api.network']
+
+        run_cmd('; '.join(cmd), cwd='/opt/tempest')

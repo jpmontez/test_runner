@@ -66,7 +66,13 @@ class Environment(object):
     def create_guests(self, password='secrete'):
         LOG.info('Creating guest users')
         self.tenant = self.keystone.tenants.create(rand_name('guest'))
-        self.role = self.keystone.roles.create('Member')
+
+        try:
+            roles = self.keystone.roles.list()
+            self.role = self._find_resource(roles, 'Member')
+        except:
+            self.role = self.keystone.roles.create('Member')
+
         self.guests = []
         for _ in range(2):
             user = self.keystone.users.create(name=rand_name('guest'),
@@ -93,8 +99,13 @@ class Environment(object):
 
     @staticmethod
     def _find_resource(resources, name):
-        return next(resource for resource in resources
-                    if name in resource['name'])
+        for resource in resources:
+            if isinstance(resource, dict):
+                if name in resource['name']:
+                    return resource
+            else:
+                if name in resource.name:
+                    return resource
 
     def get_network(self):
         LOG.info('Fetching networks')

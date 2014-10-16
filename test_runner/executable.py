@@ -34,8 +34,7 @@ def main():
 
     with cleanup(environment):
         environment.build()
-
-    Tempest(environment).populate_config()
+        Tempest(environment).run()
 
 
 if __name__ == '__main__':
