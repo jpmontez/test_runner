@@ -66,12 +66,7 @@ class Environment(object):
     def create_guests(self, password='secrete'):
         LOG.info('Creating guest users')
         self.tenant = self.keystone.tenants.create(rand_name('guest'))
-
-        try:
-            self.role = self.keystone.roles.create('Member')
-        except Exception as exc:
-            LOG.info('Member role already exists')
-
+        self.role = self.keystone.roles.create('Member')
         self.guests = []
         for _ in range(2):
             user = self.keystone.users.create(name=rand_name('guest'),
