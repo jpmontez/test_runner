@@ -69,7 +69,7 @@ class Environment(object):
 
         try:
             roles = self.keystone.roles.list()
-            self.role = _find_resource(roles, 'Member')
+            self.role = self._find_resource(roles, 'Member')
         except:
             self.role = self.keystone.roles.create('Member')
 
