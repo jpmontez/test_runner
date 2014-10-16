@@ -34,11 +34,7 @@ def main():
 
     with cleanup(environment):
         environment.build()
-
-    # TODO: implement a context manager for more control
-    framework = Tempest(environment)
-    framework.populate_config()
-    framework.run()
+        Tempest(environment).run()
 
 
 if __name__ == '__main__':

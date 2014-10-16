@@ -29,6 +29,7 @@ class Tempest(Framework):
 
     def __init__(self, environment):
         super(Tempest, self).__init__(environment)
+        self.populate_config()
 
     def populate_config(self):
         LOG.info('Building configuration file')
