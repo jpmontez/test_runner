@@ -1,6 +1,4 @@
 import logging
-import re
-import sys
 
 from glanceclient.v1.client import Client as glance_client
 from keystoneclient.v2_0.client import Client as keystone_client
@@ -11,7 +9,7 @@ from .utils import rand_name
 
 LOG = logging.getLogger(__name__)
 
-CIRROS_URL='http://download.cirros-cloud.net/0.3.3/cirros-0.3.3-x86_64-disk.img'
+CIRROS_URL = 'http://download.cirros-cloud.net/0.3.3/cirros-0.3.3-x86_64-disk.img'  # noqa
 
 
 class Environment(object):
@@ -58,10 +56,14 @@ class Environment(object):
 
     def destroy(self):
         LOG.info('Destroying environment')
-        if self.guests: map(self.keystone.users.delete, self.guests)
-        if self.tenant: self.keystone.tenants.delete(self.tenant)
-        if self.role: self.keystone.roles.delete(self.role)
-        if self.images: self.glance.images.delete(self.images[0])
+        if self.guests:
+            map(self.keystone.users.delete, self.guests)
+        if self.tenant:
+            self.keystone.tenants.delete(self.tenant)
+        if self.role:
+            self.keystone.roles.delete(self.role)
+        if self.images:
+            self.glance.images.delete(self.images[0])
 
     def create_guests(self, password='secrete'):
         LOG.info('Creating guest users')

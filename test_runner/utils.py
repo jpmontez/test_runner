@@ -1,5 +1,4 @@
 import logging
-import sys
 import uuid
 
 from contextlib import contextmanager
@@ -38,4 +37,4 @@ def cleanup(stage):
 
 
 def rand_name(prefix):
-     return '{}-{}'.format(prefix, str(uuid.uuid4()))
+    return '{}-{}'.format(prefix, str(uuid.uuid4()))

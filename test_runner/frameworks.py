@@ -1,10 +1,7 @@
-import json
 import logging
-import os
-import requests
 
 from jinja2 import Template
-from os.path import abspath, dirname, exists, join
+from os.path import abspath, dirname, join
 
 from .utils import run_cmd
 
