@@ -1,7 +1,7 @@
 import logging
+import os
 
 from jinja2 import Template
-from os.path import abspath, dirname, join
 
 from .utils import run_cmd
 
@@ -30,20 +30,25 @@ class Tempest(Framework):
 
     def populate_config(self):
         LOG.info('Building configuration file')
-        template_dir = join(abspath(dirname(__file__)), 'files/')
 
-        with open(join(template_dir, 'tempest.conf.example'), 'r') as fp:
+        template = os.path.join(os.path.dirname(__file__),
+                                'tempest.conf.example')
+
+        with open(template, 'r') as fp:
             sample = fp.read()
+            self.config = Template(sample).render(
+                admin=self.admin,
+                guests=self.guests,
+                endpoints=self.endpoints,
+                images=self.images,
+                network=self.network,
+                router=self.router)
 
-        self.config = Template(sample).render(
-            admin=self.admin,
-            guests=self.guests,
-            endpoints=self.endpoints,
-            images=self.images,
-            network=self.network,
-            router=self.router)
+        config_dir = '/etc/tempest'
+        if not os.path.exists(config_dir):
+            os.mkdir(config_dir)
 
-        with open('/etc/tempest/tempest.conf', 'w') as fp:
+        with open(os.path.join(config_dir, 'tempest.conf'), 'w') as fp:
             fp.write(self.config)
 
     def run(self):
