@@ -58,7 +58,7 @@ class Tempest(Framework):
         tempest_url = 'https://github.com/openstack/tempest.git'
         tempest_dir = '/opt/tempest'
 
-        if os.path.exits(tempest_dir):
+        if os.path.exists(tempest_dir):
             cmd = ['git fetch --all',
                    'git reset --hard origin/master']
 
