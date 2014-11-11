@@ -1,10 +1,25 @@
 import logging
+import os
 import uuid
 
 from contextlib import contextmanager
 from subprocess import check_call, CalledProcessError
 
 LOG = logging.getLogger(__name__)
+
+
+def touch(directory, filename=None):
+    file_path = os.path.join(directory, filename)
+
+    if os.path.exists(file_path):
+        os.utime(file_path, None)
+    else:
+        os.mkdirs(directory)
+
+    if filename is not None:
+        open(file_path, 'a').close()
+
+    return file_path
 
 
 def run_cmd(command, **kwargs):
