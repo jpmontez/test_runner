@@ -32,7 +32,7 @@ class Tempest(Framework):
         LOG.info('Building configuration file')
 
         template = os.path.join(os.path.dirname(__file__),
-                                'tempest.conf.example')
+                                'files/tempest.conf.example')
 
         with open(template, 'r') as fp:
             sample = fp.read()
