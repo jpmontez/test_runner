@@ -14,7 +14,7 @@ def touch(directory, filename=None):
     if os.path.exists(file_path):
         os.utime(file_path, None)
     else:
-        os.mkdirs(directory)
+        os.makedirs(directory)
 
     if filename is not None:
         open(file_path, 'a').close()
