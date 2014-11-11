@@ -27,6 +27,7 @@ class Tempest(Framework):
     def __init__(self, environment):
         super(Tempest, self).__init__(environment)
         self.populate_config()
+        self.install()
 
     def populate_config(self):
         LOG.info('Building configuration file')
@@ -50,6 +51,20 @@ class Tempest(Framework):
 
         with open(os.path.join(config_dir, 'tempest.conf'), 'w') as fp:
             fp.write(self.config)
+
+    def install(self):
+        LOG.info('Installing Tempest')
+
+        tempest_url = 'https://github.com/openstack/tempest.git'
+        tempest_dir = '/opt/tempest'
+
+        if os.path.exits(tempest_dir):
+            cmd = ['git fetch --all',
+                   'git reset --hard origin/master']
+
+            run_cmd('; '.join(cmd), cwd='/opt/tempest')
+        else:
+            run_cmd('git clone {0} {1}'.format(tempest_url, tempest_dir))
 
     def run(self):
         LOG.info('Executing tests')
