@@ -28,8 +28,7 @@ def run_cmd(command, **kwargs):
     :param command: String of a command to run within a shell
     :returns: Dictionary with keys relating to the execution's success
     """
-    if kwargs['cwd']:
-        cwd = kwargs['cwd']
+    cwd = kwargs.get('cwd', None)
 
     try:
         ret = check_call(command, shell=True, cwd=cwd)
