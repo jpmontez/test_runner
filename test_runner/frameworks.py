@@ -3,7 +3,7 @@ import os
 
 from jinja2 import Template
 
-from .utils import run_cmd, touch
+from test_runner.utils import run_cmd, touch
 
 LOG = logging.getLogger(__name__)
 

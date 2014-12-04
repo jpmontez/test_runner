@@ -5,7 +5,7 @@ from keystoneclient.v2_0.client import Client as keystone_client
 from neutronclient.v2_0.client import Client as neutron_client
 from novaclient.v1_1 import client as nova_client
 
-from .utils import rand_name
+from test_runner.utils import rand_name
 
 LOG = logging.getLogger(__name__)
 
